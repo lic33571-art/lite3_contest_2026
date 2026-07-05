@@ -1,0 +1,104 @@
+# 2026中国高校智能机器人创意大赛 — 四足大型组 共享参数配置
+# 绝影Lite3 + NVIDIA Jetson Xavier NX + Intel RealSense D435i
+#
+# 说明：所有模块共享的配置参数，便于比赛中快速调整。
+# 参数通过rospy.get_param()在各自节点中读取。
+
+# ===== 巡线参数 =====
+line_tracking:
+  # ROI设置（画面下方50%~95%区域）
+  roi_top: 0.50
+  roi_bottom: 0.95
+
+  # 速度参数
+  linear_x: 0.10             # 最大前进速度 m/s
+  linear_x_min: 0.06         # 最小前进速度 m/s
+
+  # PD控制器参数
+  kp_track: 0.004            # 巡线比例增益
+  kd_track: 0.003            # 巡线微分增益
+  dead_zone: 20              # 死区像素（在此范围内不调整）
+  history_size: 5            # 平滑窗口大小
+  cluster_max_gap: 100       # 聚类过滤最大间距px
+
+  # 黑色边界线避障参数
+  black_safe_distance: 120   # 安全距离px
+  black_danger_distance: 80  # 危险距离px
+  black_warn_distance: 45    # 预警距离px
+  avoid_kp: 0.008            # 避障比例增益
+  avoid_weight: 2.5          # 避障权重
+  avoid_max: 0.40            # 最大避障角速度 rad/s
+
+  # LOST扫描参数
+  scan_angular: 0.20         # 扫描角速度 rad/s
+  scan_period: 40            # 扫描半周期帧数
+  scan_speed: 0.04           # 扫描前进速度 m/s
+
+  # 冲出保护参数
+  outbound_recover_angular: 0.25  # 回退转向速度 rad/s
+
+  # 白线段检测参数（国赛特色 - 六条均匀白线段）
+  white_line_min_area: 40
+  white_line_aspect_min: 1.0
+  white_line_aspect_max: 50.0
+
+  # 锥形桶避障参数（HSV色彩空间检测红色锥形桶）
+  cone_detect_enabled: true
+  cone_red_lower: [0, 100, 100]
+  cone_red_upper: [10, 255, 255]
+  cone_red_lower2: [160, 100, 100]
+  cone_red_upper2: [180, 255, 255]
+  cone_min_area: 500
+  cone_avoid_distance: 150    # 锥形桶避障触发距离px
+  cone_avoid_angular: 0.3     # 锥形桶避障转向 rad/s
+
+# ===== 巡检识别参数 =====
+meter_recognition:
+  # 仪表盘检测参数
+  meter_min_radius: 30
+  meter_max_radius: 150
+  pointer_length_ratio: 0.7
+
+  # 颜色分区角度定义（黄=偏低/绿=正常/红=偏高）
+  yellow_sector_start: 30
+  yellow_sector_end: 90
+  green_sector_start: 90
+  green_sector_end: 150
+  red_sector_start: 150
+  red_sector_end: 210
+
+  # OCR参数
+  ocr_confidence_threshold: 0.6
+
+  # 巡检超时
+  inspection_timeout: 30.0
+
+# ===== 语音播报参数 =====
+voice_broadcast:
+  tts_engine: "pyttsx3"
+  language: "zh-CN"
+  rate: 150
+  volume: 1.0
+
+# ===== 机械臂参数 =====
+arm_control:
+  arm_dof: 6
+  max_reach: 0.5
+  grasp_height: 0.55
+  grasp_approach_distance: 0.1
+  gripper_open_width: 0.08
+  gripper_close_width: 0.03
+  move_speed: 0.1
+
+  # 颜色检测HSV阈值
+  red_hsv_lower: [0, 100, 100]
+  red_hsv_upper: [10, 255, 255]
+  green_hsv_lower: [35, 50, 50]
+  green_hsv_upper: [85, 255, 255]
+
+# ===== 主控制器参数 =====
+main_controller:
+  inspection_zone_distance: 2.0   # 检测区距离阈值 m
+  grasp_zone_distance: 1.5        # 抓取区距离阈值 m
+  max_grasp_attempts: 3           # 最大抓取尝试次数
+  max_place_attempts: 2           # 最大放置尝试次数

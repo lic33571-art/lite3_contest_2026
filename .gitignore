@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.bag
+*.log
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+build/
+devel/
+install/
+catkin_generated/
+CMakeCache.txt
