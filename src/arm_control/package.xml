@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>arm_control</name>
+  <version>1.0.0</version>
+  <description>Arm control and grasp task for Lite3 contest 2026</description>
+  <maintainer email="team@example.com">Contest Team</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>cv_bridge</depend>
+  <depend>common</depend>
+</package>

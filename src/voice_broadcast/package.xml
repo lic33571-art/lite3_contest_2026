@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>voice_broadcast</name>
+  <version>1.0.0</version>
+  <description>Chinese TTS voice broadcast for Lite3 contest 2026</description>
+  <maintainer email="team@example.com">Contest Team</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+  <depend>common</depend>
+</package>
