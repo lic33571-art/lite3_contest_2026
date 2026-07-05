@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- 主控制器启动文件 -->
+  
+  <node pkg="main_controller" type="contest_fsm.py" name="contest_fsm" output="screen">
+    <!-- 检测区距离阈值 -->
+    <param name="inspection_zone_distance" value="2.0"/>
+    <param name="grasp_zone_distance" value="1.5"/>
+    
+    <!-- 重试次数 -->
+    <param name="max_grasp_attempts" value="3"/>
+    <param name="max_place_attempts" value="2"/>
+    
+    <!-- 巡检超时 -->
+    <param name="inspection_timeout" value="120.0"/>
+  </node>
+</launch>

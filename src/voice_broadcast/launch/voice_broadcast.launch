@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- 语音播报模块启动文件 -->
+  
+  <node pkg="voice_broadcast" type="tts_broadcaster.py" name="tts_broadcaster" output="screen">
+    <param name="tts_engine" value="pyttsx3"/>
+    <param name="language" value="zh-CN"/>
+    <param name="rate" value="150"/>
+    <param name="volume" value="1.0"/>
+  </node>
+</launch>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- 巡检识别模块启动文件 -->
+  
+  <!-- 启动仪表盘识别节点 -->
+  <node pkg="meter_recognition" type="meter_reader.py" name="meter_reader" output="screen">
+    <param name="meter_min_radius" value="30"/>
+    <param name="meter_max_radius" value="150"/>
+    <param name="pointer_length_ratio" value="0.7"/>
+  </node>
+  
+  <!-- 启动字母OCR节点 -->
+  <node pkg="meter_recognition" type="letter_ocr.py" name="letter_ocr" output="screen">
+    <param name="template_min_confidence" value="0.3"/>
+    <param name="letter_min_area" value="500"/>
+  </node>
+  
+  <!-- 启动巡检任务整合节点 -->
+  <node pkg="meter_recognition" type="inspection_task.py" name="inspection_task" output="screen">
+    <param name="inspection_timeout" value="120.0"/>
+  </node>
+</launch>

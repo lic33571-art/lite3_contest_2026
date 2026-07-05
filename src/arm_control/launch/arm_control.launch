@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- 机械臂抓取模块启动文件 -->
+  
+  <!-- 启动机械臂控制节点 -->
+  <node pkg="arm_control" type="arm_controller.py" name="arm_controller" output="screen">
+    <param name="arm_dof" value="6"/>
+    <param name="max_reach" value="0.5"/>
+    <param name="move_speed" value="0.1"/>
+    <param name="gripper_open_width" value="0.08"/>
+    <param name="gripper_close_width" value="0.03"/>
+  </node>
+  
+  <!-- 启动抓取任务节点 -->
+  <node pkg="arm_control" type="grasp_task.py" name="grasp_task" output="screen">
+    <param name="grasp_height" value="0.55"/>
+    <param name="grasp_approach_distance" value="0.1"/>
+    <param name="move_speed" value="0.1"/>
+  </node>
+</launch>

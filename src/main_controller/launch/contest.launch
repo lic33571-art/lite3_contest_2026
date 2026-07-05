@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!-- ============================================ -->
+<!-- 2026中国高校智能机器人创意大赛 - 一键启动文件 -->
+<!-- 绝影Lite3 四足大型组 全系统启动 -->
+<!-- ============================================ -->
+<launch>
+  <!-- 参数配置 -->
+  <rosparam file="$(find main_controller)/../../config/contest_params.yaml" command="load"/>
+  
+  <!-- RealSense相机 -->
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+    <arg name="enable_color" value="true"/>
+    <arg name="enable_depth" value="true"/>
+    <arg name="color_width" value="640"/>
+    <arg name="color_height" value="480"/>
+    <arg name="color_fps" value="30"/>
+    <arg name="depth_width" value="640"/>
+    <arg name="depth_height" value="480"/>
+    <arg name="depth_fps" value="30"/>
+    <arg name="align_depth" value="true"/>
+  </include>
+  
+  <!-- 语音播报模块 -->
+  <include file="$(find voice_broadcast)/launch/voice_broadcast.launch"/>
+  
+  <!-- 巡线导航模块 -->
+  <include file="$(find line_tracking)/launch/line_tracking.launch"/>
+  
+  <!-- 巡检识别模块 -->
+  <include file="$(find meter_recognition)/launch/meter_recognition.launch"/>
+  
+  <!-- 机械臂抓取模块 -->
+  <include file="$(find arm_control)/launch/arm_control.launch"/>
+  
+  <!-- 主控制器（FSM） -->
+  <include file="$(find main_controller)/launch/main_controller.launch"/>
+  
+  <!-- 任务状态监控 -->
+  <node pkg="rostopic" type="rostopic" name="task_monitor" args="echo /task_status" output="screen"/>
+</launch>
